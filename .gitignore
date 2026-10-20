@@ -5,6 +5,13 @@ node_modules
 .pnp
 .pnp.js
 
+# pnpm store (if accidentally placed inside repo)
+.pnpm-store/
+
+# AI agent auto-generated files (Next.js generates these)
+AGENTS.md
+CLAUDE.md
+
 # Local env files
 .env
 .env.local

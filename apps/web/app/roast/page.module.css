@@ -1,108 +1,120 @@
 .page {
-  min-height: 100vh;
+  min-height: 100svh;
+  padding: 28px 24px 80px;
   display: flex;
-  align-items: flex-start;
   justify-content: center;
-  padding: 60px 24px 80px;
 }
 
-.resultWrapper {
+.result {
   width: 100%;
-  max-width: 600px;
+  max-width: 560px;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 36px;
+}
+
+.brand {
+  font-family: var(--display);
+  font-size: 1.35rem;
+  letter-spacing: 0.03em;
 }
 
 .header {
-  text-align: center;
+  padding-top: 8px;
 }
 
 .title {
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
-  font-weight: 900;
-  letter-spacing: -0.03em;
+  font-family: var(--display);
+  font-size: clamp(2.6rem, 9vw, 4.4rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 0.88;
 }
 
 .sub {
-  font-size: 0.8rem;
-  color: var(--text-dim);
-  margin-top: 6px;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 1rem;
 }
 
 .artistRow {
+  list-style: none;
   display: flex;
-  gap: 12px;
-  overflow-x: auto;
   padding-bottom: 4px;
-  scrollbar-width: none;
 }
-
-.artistRow::-webkit-scrollbar { display: none; }
 
 .artistCard {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 6px;
+  gap: 8px;
   flex-shrink: 0;
+  width: 88px;
+  margin-right: -22px;
 }
 
-.artistImg {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--border);
+.artistCard:last-child {
+  margin-right: 0;
 }
 
+.artistImg,
 .artistImgFallback {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: var(--bg-card);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.6rem;
-  border: 2px solid var(--border);
+  width: 88px;
+  height: 88px;
+  object-fit: cover;
+  display: block;
+  background: #2a1218;
+  outline: 3px solid var(--bg);
 }
 
 .artistName {
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  max-width: 72px;
+  font-size: 0.75rem;
+  color: var(--muted);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  text-align: center;
+  padding-right: 16px;
 }
 
 .messageBox {
-  text-align: center;
-  max-width: 420px;
+  min-height: 100svh;
+  max-width: 28rem;
+  margin: 0 auto;
+  padding: 80px 24px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  padding: 48px 24px;
+  justify-content: center;
+  gap: 14px;
 }
 
-.messageEmoji { font-size: 3rem; }
-
-.messageBox h2 {
-  font-size: 1.6rem;
-  font-weight: 800;
+.messageBox h1 {
+  font-family: var(--display);
+  font-size: clamp(2rem, 8vw, 3.4rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 0.95;
 }
 
 .messageBox p {
-  color: var(--text-muted);
-  line-height: 1.6;
+  color: var(--muted);
+  line-height: 1.5;
 }
 
 .homeLink {
-  margin-top: 8px;
-  color: var(--green);
+  margin-top: 10px;
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 16px 26px;
+  background: var(--acid);
+  color: var(--acid-ink);
   font-weight: 600;
-  font-size: 0.9rem;
+  transform: skewX(-10deg);
+}
+
+.homeLinkInner {
+  display: inline-block;
+  transform: skewX(10deg);
+}
+
+.homeLink:hover {
+  background: #2be36c;
 }

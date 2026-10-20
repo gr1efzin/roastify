@@ -4,7 +4,7 @@ import crypto from 'crypto';
 
 export async function GET() {
   const state = crypto.randomUUID();
-  const scopes = 'user-read-private user-read-email user-top-read';
+  const scopes = 'user-read-private user-read-email user-top-read user-read-recently-played';
   const base = process.env.NEXT_PUBLIC_BASE_URL!;
 
   const params = new URLSearchParams({

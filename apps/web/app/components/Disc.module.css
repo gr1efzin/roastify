@@ -1,0 +1,33 @@
+.disc {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.sharpie {
+  fill: #14080c;
+  font-family: var(--display);
+  font-size: 28px;
+  letter-spacing: 8px;
+}
+
+.mix {
+  fill: #6a4038;
+  font-family: var(--body);
+  font-size: 10px;
+  letter-spacing: 3px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .spin {
+    animation: disc-turn 36s linear infinite;
+    transform-origin: 50% 50%;
+  }
+}
+
+@keyframes disc-turn {
+  to {
+    transform: rotate(360deg);
+  }
+}

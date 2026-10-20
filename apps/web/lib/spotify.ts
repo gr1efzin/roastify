@@ -11,6 +11,29 @@ export async function getUserProfile(token: string) {
   return data;
 }
 
+export async function getRecentlyPlayed(token: string, limit = 50) {
+  const { data } = await spotifyApi.get('/me/player/recently-played', {
+    params: { limit },
+    headers: authHeaders(token),
+  });
+  // Returns unique tracks + unique artists derived from play history
+  const tracks: SpotifyTrack[] = [];
+  const artistMap = new Map<string, SpotifyArtist>();
+  const seen = new Set<string>();
+  for (const item of data.items as { track: SpotifyTrack }[]) {
+    if (!seen.has(item.track.id)) {
+      seen.add(item.track.id);
+      tracks.push(item.track);
+    }
+    for (const a of item.track.artists) {
+      if (!artistMap.has(a.id)) {
+        artistMap.set(a.id, { id: a.id, name: a.name, genres: [], images: [], popularity: 0 });
+      }
+    }
+  }
+  return { tracks, artists: [...artistMap.values()] };
+}
+
 export async function getTopArtists(token: string, limit = 20) {
   const { data } = await spotifyApi.get('/me/top/artists', {
     params: { time_range: 'medium_term', limit },
@@ -52,7 +75,7 @@ export interface SpotifyArtist {
 export interface SpotifyTrack {
   id: string;
   name: string;
-  artists: { name: string }[];
+  artists: { id: string; name: string }[];
   album: { images: { url: string }[] };
 }
 

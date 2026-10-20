@@ -1,152 +1,104 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 24px;
+  gap: 28px;
   width: 100%;
 }
 
-/* The card that gets captured as PNG */
 .card {
   width: 100%;
-  max-width: 560px;
-  background: linear-gradient(145deg, #111 0%, #0a0a0a 100%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius);
-  padding: 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Subtle gradient glow top-left */
-.card::before {
-  content: '';
-  position: absolute;
-  top: -40px;
-  left: -40px;
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(29, 185, 84, 0.15) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.cardHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  background: var(--bg-lift);
+  color: var(--ink);
+  padding: 32px 28px 24px;
 }
 
 .logo {
-  font-size: 0.9rem;
-  font-weight: 800;
-  letter-spacing: 0.05em;
-  color: var(--green);
-}
-
-.genre {
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  text-transform: capitalize;
-  background: rgba(255,255,255,0.05);
-  padding: 3px 10px;
-  border-radius: 100px;
-}
-
-.profile {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--green);
-}
-
-.avatarFallback {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--bg-card);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.4rem;
+  font-family: var(--display);
+  font-size: 1.1rem;
+  letter-spacing: 0.03em;
+  margin-bottom: 28px;
 }
 
 .username {
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: var(--text);
+  font-family: var(--display);
+  font-size: clamp(2rem, 7vw, 3.2rem);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
 }
 
 .roastText {
+  font-size: 1.12rem;
+  line-height: 1.5;
+}
+
+.evidence {
+  margin-top: 24px;
+  padding-left: 1.15em;
+  color: var(--muted);
   font-size: 0.95rem;
-  line-height: 1.75;
-  color: #d4d4d4;
-  font-style: italic;
-  border-left: 3px solid var(--orange);
-  padding-left: 14px;
-}
-
-.artists {
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.artistChip {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  background: rgba(255,255,255,0.06);
-  padding: 3px 10px;
-  border-radius: 100px;
-  border: 1px solid var(--border);
+.tracks {
+  list-style: none;
+  margin-top: 16px;
+  color: var(--dim);
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .cardFooter {
-  font-size: 0.7rem;
-  color: var(--text-dim);
-  text-align: right;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 28px;
+  font-size: 0.85rem;
+  color: var(--dim);
 }
 
-/* Action buttons */
 .actions {
   display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
 }
 
 .downloadBtn {
-  padding: 12px 28px;
-  background: var(--green);
-  color: #000;
-  font-weight: 700;
-  font-size: 0.9rem;
-  border-radius: 100px;
-  box-shadow: 0 0 20px var(--green-glow);
+  display: inline-flex;
+  align-items: center;
+  padding: 16px 26px;
+  background: var(--acid);
+  color: var(--acid-ink);
+  font-size: 1.05rem;
+  font-weight: 600;
+  transform: skewX(-10deg);
 }
 
-.logoutBtn {
-  padding: 12px 28px;
-  background: transparent;
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  border-radius: 100px;
-  border: 1px solid var(--border);
-  font-weight: 500;
+.downloadInner {
   display: inline-block;
-  transition: color 0.2s, border-color 0.2s;
+  transform: skewX(10deg);
 }
 
-.logoutBtn:hover {
-  color: var(--text);
-  border-color: var(--border-bright);
+.downloadBtn:hover {
+  background: #2be36c;
+}
+
+.downloadBtn:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+}
+
+.logoutLink {
+  color: var(--dim);
+  font-size: 0.95rem;
+}
+
+.logoutLink:hover {
+  color: var(--ink);
 }

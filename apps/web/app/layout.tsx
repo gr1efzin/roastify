@@ -1,20 +1,46 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
+import localFont from 'next/font/local';
 import './globals.css';
 
+const tanker = localFont({
+  src: './fonts/Tanker-Regular.woff2',
+  variable: '--font-display',
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
-  title: 'Roastify — Get Your Spotify Taste Roasted 🔥',
-  description: 'Connect your Spotify and let AI brutally roast your music taste. Share the burn with friends.',
-  openGraph: {
-    title: 'Roastify',
-    description: 'Your music taste is about to get roasted 🔥',
-    type: 'website',
+  title: {
+    default: 'Roastify: we roast your Spotify',
+    template: '%s | Roastify',
   },
+  description:
+    'Connect Spotify. We pull your top artists, tracks, and genres, then roast your taste.',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? 'https://roastify.vercel.app'),
+  openGraph: {
+    title: 'Roastify: we roast your Spotify',
+    description: 'Connect Spotify. We roast your taste.',
+    type: 'website',
+    siteName: 'Roastify',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Roastify: we roast your Spotify',
+    description: 'Connect Spotify. We roast your taste.',
+  },
+  robots: { index: true, follow: true },
+};
+
+export const viewport: Viewport = {
+  themeColor: '#14080c',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" className={tanker.variable}>
+      <body>
+        <div className="atmosphere" aria-hidden="true" />
+        <div className="shell">{children}</div>
+      </body>
     </html>
   );
 }

@@ -14,7 +14,7 @@ export async function generateRoast(prompt: string): Promise<string> {
     {
       model: 'command-r-plus-08-2024',
       messages: [{ role: 'user', content: prompt }],
-      temperature: 0.9,
+      temperature: 1.0,
       stream: false,
     },
     { headers: { Authorization: `Bearer ${apiKey}` } }

@@ -2,82 +2,56 @@
 
 import { useRef } from 'react';
 import { toPng } from 'html-to-image';
-import { motion } from 'motion/react';
 import type { SpotifyData } from '../../lib/spotify';
 import styles from './RoastCard.module.css';
 
-interface Props {
-  roast: string;
-  data: SpotifyData;
-}
-
-export default function RoastCard({ roast, data }: Props) {
+export default function RoastCard({ roast, data }: { roast: string; data: SpotifyData }) {
   const cardRef = useRef<HTMLDivElement>(null);
+  const topArtists = data.topArtists.slice(0, 5);
+  const topTracks = data.topTracks.slice(0, 3);
+  const topGenre = data.topGenres[0] ?? 'unfiled';
 
   const handleDownload = async () => {
     if (!cardRef.current) return;
     const url = await toPng(cardRef.current, { cacheBust: true, pixelRatio: 2 });
     const a = document.createElement('a');
-    a.download = 'roastify-card.png';
+    a.download = 'roastify.png';
     a.href = url;
     a.click();
   };
 
-  const avatar = data.profile.images?.[0]?.url;
-  const topArtists = data.topArtists.slice(0, 5);
-  const topGenre = data.topGenres[0] ?? 'unknown';
-
   return (
     <div className={styles.wrapper}>
-      {/* The shareable card — captured by html-to-image */}
       <div ref={cardRef} className={styles.card}>
-        <div className={styles.cardHeader}>
-          <span className={styles.logo}>🔥 Roastify</span>
-          <span className={styles.genre}>{topGenre}</span>
-        </div>
-
-        <div className={styles.profile}>
-          {avatar ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={avatar} alt="" className={styles.avatar} />
-          ) : (
-            <div className={styles.avatarFallback}>🎧</div>
-          )}
-          <span className={styles.username}>@{data.profile.display_name}</span>
-        </div>
-
-        <p className={styles.roastText}>&quot;{roast}&quot;</p>
-
-        <div className={styles.artists}>
+        <p className={styles.logo}>Roastify</p>
+        <p className={styles.username}>{data.profile.display_name}</p>
+        <p className={styles.roastText}>{roast}</p>
+        <ol className={styles.evidence}>
           {topArtists.map((a) => (
-            <span key={a.id} className={styles.artistChip}>{a.name}</span>
+            <li key={a.id}>{a.name}</li>
           ))}
-        </div>
-
-        <div className={styles.cardFooter}>
+        </ol>
+        <ul className={styles.tracks}>
+          {topTracks.map((t) => (
+            <li key={t.id}>
+              {t.name}
+              {t.artists[0] ? ` - ${t.artists[0].name}` : ''}
+            </li>
+          ))}
+        </ul>
+        <p className={styles.cardFooter}>
+          {topGenre}
           <span>roastify.app</span>
-        </div>
+        </p>
       </div>
 
-      {/* Action buttons — outside the captured area */}
       <div className={styles.actions}>
-        <motion.button
-          className={styles.downloadBtn}
-          onClick={handleDownload}
-          whileHover={{ scale: 1.04 }}
-          whileTap={{ scale: 0.97 }}
-        >
-          ⬇ Download Card
-        </motion.button>
-
-        <motion.a
-          href="/api/auth/logout"
-          className={styles.logoutBtn}
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-        >
-          Try Another Account
-        </motion.a>
+        <button type="button" className={styles.downloadBtn} onClick={handleDownload}>
+          <span className={styles.downloadInner}>Save the roast</span>
+        </button>
+        <a href="/api/auth/logout" className={styles.logoutLink}>
+          Different account
+        </a>
       </div>
     </div>
   );
