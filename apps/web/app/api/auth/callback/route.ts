@@ -49,7 +49,10 @@ export async function GET(request: Request) {
     res.cookies.delete('spotify_state');
 
     return res;
-  } catch {
+  } catch (err: unknown) {
+    const axErr = err as { response?: { status: number; data: unknown }; message?: string };
+    console.error('[callback] token exchange failed:', axErr.response?.status, axErr.response?.data ?? axErr.message);
+    console.error('[callback] redirect_uri sent:', `${base}/api/auth/callback`);
     return NextResponse.redirect(`${base}/?error=token_exchange_failed`);
   }
 }
