@@ -8,6 +8,8 @@
       "outputs": [".next/**", "!.next/cache/**", "!.next/dev/**"],
       "env": [
         "NEXT_PUBLIC_BASE_URL",
+        "VERCEL_PROJECT_PRODUCTION_URL",
+        "VERCEL_URL",
         "SPOTIFY_CLIENT_ID",
         "SPOTIFY_CLIENT_SECRET",
         "COHERE_API_KEY",

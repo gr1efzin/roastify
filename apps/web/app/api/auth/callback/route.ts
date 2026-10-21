@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import axios from 'axios';
 import { encryptToken } from '../../../../lib/session';
+import { getBaseUrl } from '../../../../lib/baseUrl';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -9,7 +10,7 @@ export async function GET(request: Request) {
   const state = searchParams.get('state');
   const error = searchParams.get('error');
 
-  const base = process.env.NEXT_PUBLIC_BASE_URL!;
+  const base = getBaseUrl();
   const store = await cookies();
 
   if (error || !code) {

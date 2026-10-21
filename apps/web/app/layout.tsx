@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
+import { getBaseUrl } from '../lib/baseUrl';
 
 const tanker = localFont({
   src: './fonts/Tanker-Regular.woff2',
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
   },
   description:
     'Connect Spotify. We pull your top artists, tracks, and genres, then roast your taste.',
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? 'https://roastify.vercel.app'),
+  metadataBase: new URL(getBaseUrl()),
   openGraph: {
     title: 'Roastify: we roast your Spotify',
     description: 'Connect Spotify. We roast your taste.',
